@@ -13,7 +13,7 @@
 	--fw-normal: 600;
 	--fw-bold: 800;
 
-	--b-radius: 0.5rem;
+	--radius: 0.5rem;
 }
 
 body[data-theme='dark'] {
