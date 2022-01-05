@@ -1,49 +1,29 @@
-import { Controls } from './components/Controls';
-import { Header } from './components/Header';
-import { Main } from './components/Main';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { ALL_COUNTRIES } from './config';
-import { List } from './components/List';
-import { Card } from './components/Card';
-
+import { Header } from './components/Header';
+import { Main } from './components/Main';
+import { HomePage } from './pages/HomePage';
+import { NotFound } from './pages/NotFound';
+import { Details } from './pages/Details';
+import { Routes, Route } from 'react-router-dom';
 function App() {
 	const [countries, setCountries] = useState([]);
-
-	console.log(countries);
-	useEffect(() => {
-		axios.get(ALL_COUNTRIES).then(({ data }) => setCountries(data));
-	}, []);
 
 	return (
 		<>
 			<Header />
 			<Main>
-				<Controls />
-				<List>
-					{countries.map((el) => {
-						const countryInfo = {
-							img: el.flags.png,
-							name: el.name,
-							info: [
-								{
-									title: 'Population',
-									description: el.population.toLocaleString(),
-								},
-								{
-									title: 'Region',
-									description: el.region,
-								},
-								{
-									title: 'Capital',
-									description: el.capital,
-								},
-							],
-						};
-
-						return <Card key={el.name} {...countryInfo} />;
-					})}
-				</List>
+				<Routes>
+					<Route
+						exact
+						path='/'
+						element={
+							<HomePage countries={countries} setCountries={setCountries} />
+						}
+					/>
+					<Route path='/country/:name' element={<Details />} />
+					<Route component={NotFound} />
+				</Routes>
 			</Main>
 		</>
 	);
