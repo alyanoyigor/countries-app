@@ -22,7 +22,7 @@ function App() {
 						}
 					/>
 					<Route path='/country/:name' element={<Details />} />
-					<Route component={NotFound} />
+					<Route element={<NotFound />} />
 				</Routes>
 			</Main>
 		</>

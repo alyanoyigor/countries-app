@@ -22,6 +22,10 @@ export const HomePage = ({ countries, setCountries }) => {
 		setFilteredCountries(data);
 	};
 
+	const actualCountries = filteredCountries.length
+		? filteredCountries
+		: countries;
+
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -32,7 +36,7 @@ export const HomePage = ({ countries, setCountries }) => {
 		<>
 			<Controls onSearch={handleSearch} />
 			<List>
-				{filteredCountries.map((el) => {
+				{actualCountries.map((el) => {
 					const countryInfo = {
 						img: el.flags.png,
 						name: el.name,
